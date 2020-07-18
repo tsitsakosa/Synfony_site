@@ -3,23 +3,26 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
     </head>
     <body>
         {% block body %}{% endblock %}
         {% block javascripts %}
-        <script>
-           document.addEventListener('DOMContentLoaded', function(){
-               // http://localhost:3000/.well-know/mercure?topic=/chat
-               let url = new URL('http://localhost:3000/.well-known/mercure');
-               url.searchParams.append('topic','/chat');
-               const eventSource = new EventSource(url);
+            {{ encore_entry_script_tags('app') }}
+{#        <script>#}
+{#           document.addEventListener('DOMContentLoaded', function(){#}
+{#               // http://localhost:3000/.well-know/mercure?topic=/chat#}
+{#               let url = new URL('http://localhost:3000/.well-known/mercure');#}
+{#               url.searchParams.append('topic','/chat');#}
+{#               const eventSource = new EventSource(url);#}
 
-               eventSource.onmessage = (event)=>{
-                   console.log(event);
-               }
-           });
-        </script>
+{#               eventSource.onmessage = (event)=>{#}
+{#                   console.log(event);#}
+{#               }#}
+{#           });#}
+{#        </script>#}
         {% endblock %}
     </body>
 </html>
