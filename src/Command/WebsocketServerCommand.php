@@ -27,8 +27,8 @@ class WebsocketServerCommand extends Command
             ),
             $port
         );
-
-        $server->loop->addPeriodicTimer(0.5, function () use ($handler) {
+        $handler->sendPosts();
+        $server->loop->addPeriodicTimer(10, function () use ($handler) {
             $handler->sendPosts();
         });
 

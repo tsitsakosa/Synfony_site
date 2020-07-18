@@ -21,9 +21,7 @@
     export default {
         data() {
             return {
-                greeting: 'Hello frontend app',
                 posts: [],
-                interval: null,
             }
         },
         methods: {
@@ -36,14 +34,26 @@
                     });
             }
         },
+        create() {
+
+        },
         mounted() {
-            this.feed();
-            this.interval = setInterval(function () {
-                this.feed();
-            }.bind(this), 30000);
+            //connect to socket
+            const socket = new WebSocket("ws://localhost:3001");
+            socket.addEventListener("open", function () {
+                console.log("CONNECTED");
+            });
+            let $this = this;
+            //"listen" to socket and print to console
+            socket.addEventListener("message", e => {
+                $this.$data.posts.push(JSON.parse(e.data));
+                console.log(e.data);
+            });
         },
         beforeDestroy: function () {
-            clearInterval(this.interval);
+            socket.removeEventListener("open", function () {
+                console.log("DISCONNECTED");
+            });
         }
 
     }

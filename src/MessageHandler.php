@@ -1,6 +1,7 @@
 <?php
     namespace App\Websocket;
      
+    use App\Repository\PostFactory;
     use Exception;
     use Ratchet\ConnectionInterface;
     use Ratchet\MessageComponentInterface;
@@ -50,7 +51,7 @@
 
             foreach($this->connections as $connection)
             {
-                $connection->send($num);
+                $connection->send(json_encode(PostFactory::factory()->GeneratePost()));
             }
         }
     }

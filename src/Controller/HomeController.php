@@ -8,7 +8,7 @@ use Symfony\Component\Mercure\PublisherInterface;
 use Symfony\Component\Mercure\Update;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MainController extends AbstractController
+class HomeController extends AbstractController
 {
     /**
      * @Route("/", name="home")
@@ -16,7 +16,7 @@ class MainController extends AbstractController
     public function index()
     {
         return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
+            'controller_name' => 'Home',
         ]);
     }
 
