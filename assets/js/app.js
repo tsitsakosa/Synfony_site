@@ -1,9 +1,10 @@
-import '../css/app.css';
-import 'bootstrap/dist/css/bootstrap.css'
-
 import Vue from 'vue'
-
+import '../css/app.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import { CardPlugin } from 'bootstrap-vue'
 import App from '../../src/Fontend/App'
+
+Vue.use(CardPlugin)
 
 Vue.config.productionTip = false
 

@@ -1,16 +1,24 @@
 <template>
-    <div>
+    <div class="my-5">
         <div v-for="post in posts">
-            <h2>{{post.title}}</h2>
-            <p>{{post.body}}</p>
+            <b-card
+                    :title="post.title"
+                    :sub-title="'—' + post.author"
+                    :img-src="post.imageUrl"
+                    img-alt="Image"
+                    img-bottom
+                    tag="article"
+                    style="max-width: 40rem;"
+                    class="mb-5 mx-auto"
+            >
+                <b-card-text>{{ post.body }}</b-card-text>
+            </b-card>
         </div>
     </div>
 </template>
 
 <script>
-
     export default {
-
         data() {
             return {
                 greeting: 'Hello frontend app',

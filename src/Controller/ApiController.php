@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Models\Post;
+use App\Repository\PostFactory;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,7 +19,6 @@ class ApiController extends AbstractController
      */
     public function index()
     {
-        return new JsonResponse(new Post());
-
+        return new JsonResponse(PostFactory::factory()->GeneratePost());
     }
 }
