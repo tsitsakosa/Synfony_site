@@ -31,10 +31,21 @@
         methods: {
             feed: function () {
                 fetch('/api/feed')
-                    .then(response => response.json())
+                    .then(response => {
+                        if(!response.ok) {
+                            throw Error("Error: " + response.status + " " + response.statusText);
+                        }
+                        const contentType = response.headers.get('content-type');
+                        if (!contentType || !contentType.includes('application/json')) {
+                            throw new TypeError("Oops, we haven't got JSON!");
+                        }
+                        return response;
+                    })
+                    .then(response =>  response.json())
                     .then(data => {
                         this.posts.unshift(data);
-                    });
+                    })
+                    .catch(error => console.error(error.message));
             },
             getDate(value) {
                 return moment(value).format('DD MMMM YY');
