@@ -3,7 +3,7 @@
         <div v-for="post in posts">
             <b-card
                     :title="post.title"
-                    :sub-title="'—' + post.author"
+                    :sub-title="'—' + post.author + ', ' + getDate(post.creationTime.date)"
                     :img-src="post.imageUrl"
                     img-alt="Image"
                     img-bottom
@@ -18,6 +18,7 @@
 </template>
 
 <script>
+    import moment from 'moment'
     export default {
         data() {
             return {
@@ -32,6 +33,9 @@
                         this.posts.push(data);
                         console.log(data.title)
                     });
+            },
+            getDate(value) {
+                return moment(value).format('DD MMMM YY');
             }
         },
         mounted() {
