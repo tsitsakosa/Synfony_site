@@ -6,7 +6,6 @@ import FeedApp from '../../src/Fontend/App'
 import SocketApp from '../../src/Fontend/AppSockect'
 
 Vue.use(CardPlugin)
-
 Vue.config.productionTip = false
 
 let bodyId = document.getElementsByTagName("body")[0].id;
@@ -17,6 +16,4 @@ if (bodyId === "WebSocket") {
 }
 new Vue({
     render: h => h(myApp),
-}).$mount('#app')
-
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+}).$mount('#app');

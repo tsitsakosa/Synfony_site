@@ -3,7 +3,7 @@
         <div v-for="post in posts">
             <b-card
                     :title="post.title"
-                    :sub-title="'—' + post.author"
+                    :sub-title="'—' + post.author + ', ' + getDate(post.creationTime.date)"
                     :img-src="post.imageUrl"
                     img-alt="Image"
                     img-bottom
@@ -18,10 +18,12 @@
 </template>
 
 <script>
+    import moment from 'moment'
+
+    const _TIMER_POLL = 60000
     export default {
         data() {
             return {
-                greeting: 'Hello frontend app',
                 posts: [],
                 interval: null,
             }
@@ -31,21 +33,22 @@
                 fetch('/api/feed')
                     .then(response => response.json())
                     .then(data => {
-                        this.posts.push(data);
-                        console.log(data.title)
+                        this.posts.unshift(data);
                     });
+            },
+            getDate(value) {
+                return moment(value).format('DD MMMM YY');
             }
         },
         mounted() {
             this.feed();
-            this.interval = setInterval(function () {
+            this.interval = setInterval(() => {
                 this.feed();
-            }.bind(this), 30000);
+            }, _TIMER_POLL);
         },
-        beforeDestroy: function () {
+        beforeDestroy() {
             clearInterval(this.interval);
         }
-
     }
 </script>
 <style>

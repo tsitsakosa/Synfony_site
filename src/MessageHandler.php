@@ -47,11 +47,10 @@
 
         public function sendPosts()
         {
-            $num = rand(10,100);
-
+            $post = json_encode(PostFactory::factory()->GeneratePost());
             foreach($this->connections as $connection)
             {
-                $connection->send(json_encode(PostFactory::factory()->GeneratePost()));
+                $connection->send($post);
             }
         }
     }

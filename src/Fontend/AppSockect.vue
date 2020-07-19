@@ -34,21 +34,15 @@
                     });
             }
         },
-        create() {
-
-        },
         mounted() {
             //connect to socket
             const socket = new WebSocket("ws://localhost:3001");
             socket.addEventListener("open", function () {
                 console.log("CONNECTED");
             });
-            let $this = this;
-            //"listen" to socket and print to console
             socket.addEventListener("message", e => {
-                $this.$data.posts.push(JSON.parse(e.data));
-                console.log(e.data);
-            });
+                this.$data.posts.unshift(JSON.parse(e.data));
+            }).bind(this);
         },
         beforeDestroy: function () {
             socket.removeEventListener("open", function () {
